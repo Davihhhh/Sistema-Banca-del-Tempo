@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33627.172
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sistema Banca del Tempo", "Sistema Banca del Tempo\Sistema Banca del Tempo.csproj", "{8BE8143C-35A6-4F0C-96DA-E67F8CCED7FF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8BE8143C-35A6-4F0C-96DA-E67F8CCED7FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BE8143C-35A6-4F0C-96DA-E67F8CCED7FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BE8143C-35A6-4F0C-96DA-E67F8CCED7FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BE8143C-35A6-4F0C-96DA-E67F8CCED7FF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {86CE4560-781F-4F6F-B625-45BCE0B87B50}
+	EndGlobalSection
+EndGlobal
