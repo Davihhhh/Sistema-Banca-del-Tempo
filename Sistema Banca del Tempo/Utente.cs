@@ -1,5 +1,7 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
+using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
 using System.Resources.Extensions;
 using System.Text;
@@ -13,23 +15,33 @@ namespace Sistema_Banca_del_Tempo
         private string _cognome;
         private string _telefono;
         private string _password;
-        private int _oreOfferte;
-        private int _oreRicevute;
 
         private List<Prestazione> _prestazioniOfferte;
         private List<Prestazione> _prestazioniRichieste;
         private List<Prestazione> _prestazioniEseguite;
-        private List<Prestazione> _prestazioniRicevute;
+        private List<Prestazione> _prestazioniRicevute;      
 
-        public string Nome { get; private set; }
-        public string Cognome { get; private set; }
-        public string Telefono { get; private set; }
-        private string Password { get; set; }
+        public string Nome { get { return _nome; } private set { if (value.Length < 2) throw new Exception("Nome invalido"); else _nome = value; } }
+        public string Cognome { get { return _cognome; } private set { if (value.Length < 2) throw new Exception("Cognome invalido"); else _cognome = value; } }
+        public string Telefono { get { return _telefono; } private set { 
+                if (value.Length < 10) throw new Exception("Telefono invalido"); 
+                try { Convert.ToInt32(value); } catch { throw new Exception("Telefono invalido"); }; _telefono = value; } 
+        }
+        private string Password { get { return _password; } set { if (value.Length < 4) throw new Exception("Password invalida"); else _password = value; } }
 
         public List<Prestazione> PrestazioniOfferte { get; private set; }
         public List<Prestazione> PrestazioniRichieste { get; private set; }
         public List<Prestazione> PrestazioniEseguite { get; private set; }
         public List<Prestazione> PrestazioniRicevute { get; private set; }
+
+        
+        public Utente (string nome, string cognome, string telefono, string password)
+        {          
+            Nome = nome;
+            Cognome = cognome;
+            Telefono = telefono;
+            Password = password;            
+        }
 
         public bool ottieniDebito()
         {

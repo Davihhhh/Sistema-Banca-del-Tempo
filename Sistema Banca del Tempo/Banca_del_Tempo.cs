@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Runtime;
 using System.Security.Cryptography;
@@ -14,7 +15,7 @@ namespace Sistema_Banca_del_Tempo
         private string[] _mappa;
         private List<Utente> _utenti;
         private string[] _adminPasswordList;
-        private Utente _utenteAttuale;
+        private Utente? _utenteAttuale;
         private string _password;
 
         private string frase = "Non sei un amministratore!";
@@ -39,17 +40,32 @@ namespace Sistema_Banca_del_Tempo
             get { return _adminPasswordList; }
             set { _adminPasswordList = value; }
         }
-        public Utente UtenteAttuale { get; private set; }
+        public Utente? UtenteAttuale { get; private set; }
         private string Password { get; set; }
 
         private const int size = 100;
 
+        //costruttori
         public Banca_del_Tempo()
         {
             Prestazioni = letturaPrestazioni();
             Mappa = letturaMappa();
             Utenti = letturaUtenti();
             AdminPasswordList = letturaAdminPassword();
+        }
+
+        //funzioni
+        public void login(Utente u)
+        {
+            if (UtenteAttuale.Equals(null))
+                UtenteAttuale = u;
+            else throw new Exception("Banca occupata");
+        }
+        public void logout()
+        {
+            if (!UtenteAttuale.Equals(null))
+                UtenteAttuale = null;
+            else throw new Exception("Banca vuota");
         }
 
         private List<Prestazione> letturaPrestazioni()
@@ -159,7 +175,7 @@ namespace Sistema_Banca_del_Tempo
 
                 if (i <= j)
                 {
-                    int temp = utente[i];
+                    Utente temp = utente[i];
                     utente[i] = utente[j];
                     utente[j] = temp;
                     i++;
@@ -206,9 +222,9 @@ namespace Sistema_Banca_del_Tempo
             }
             else throw new Exception(frase);
         }
-        public void deletePrestazione(string password, string prestazione)
+        public void deletePrestazione(string prestazione)
         {
-            if (checkAdminPassword(password))
+            if (checkAdminPassword(Password))
             {
                 int cont = 0;
                 foreach(Prestazione s in Prestazioni)
