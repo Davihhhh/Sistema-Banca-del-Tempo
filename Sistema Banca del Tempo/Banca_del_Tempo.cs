@@ -6,6 +6,9 @@ using System.Runtime;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Xml.Linq;
 
 namespace Sistema_Banca_del_Tempo
 {
@@ -14,7 +17,7 @@ namespace Sistema_Banca_del_Tempo
         private List<Prestazione> _prestazioni;
         private string[] _mappa;
         private List<Utente> _utenti;
-        private string[] _adminPasswordList;
+        private List<Utente> _admin;
         private Utente? _utenteAttuale;
         private string _password;
 
@@ -35,30 +38,37 @@ namespace Sistema_Banca_del_Tempo
             get { return _utenti; }
             private set { _utenti = value; }
         }
-        private string[] AdminPasswordList
+        private List<Utente> Admin
         {
-            get { return _adminPasswordList; }
-            set { _adminPasswordList = value; }
+            get { return _admin; }
+            set { _admin = value; }
         }
         public Utente? UtenteAttuale { get; private set; }
-        private string Password { get; set; }
+        private string Password { get { return _password; } set { _password = value; } }
 
         private const int size = 100;
 
         //costruttori
         public Banca_del_Tempo()
         {
-            Prestazioni = letturaPrestazioni();
+            /*Prestazioni = letturaPrestazioni();
             Mappa = letturaMappa();
             Utenti = letturaUtenti();
-            AdminPasswordList = letturaAdminPassword();
+            Admin = letturaAdmin();*/
         }
 
         //funzioni
         public void login(Utente u)
         {
             if (UtenteAttuale.Equals(null))
-                UtenteAttuale = u;
+                try
+                {
+                    UtenteAttuale = u;
+                }
+                catch (Exception)
+                {
+                    return;
+                }        
             else throw new Exception("Banca occupata");
         }
         public void logout()
@@ -86,11 +96,17 @@ namespace Sistema_Banca_del_Tempo
 
             return lista;
         }
-        private string[] letturaAdminPassword()
+        private List<Utente> letturaAdmin()
         {
-            string[] password = new string[size];
+            List<Utente> admins = new List<Utente>();
 
-            return password;
+            return admins;
+        }
+        public void aggiungiUtente(Utente utente)
+        {
+            Utenti.Add(utente);
+            string json = JsonSerializer.Serialize(utente);
+            File.WriteAllText(@"Utenti.json", json);
         }
 
 
@@ -199,7 +215,7 @@ namespace Sistema_Banca_del_Tempo
         //admin functions
         public void addPrestazione(Prestazione prestazione)
         {
-            if (checkAdminPassword(Password))
+            if (checkAdmin(UtenteAttuale))
             {
                 if (Prestazioni.Contains(prestazione))
                     throw new Exception("Prestazione già esistente");
@@ -210,7 +226,7 @@ namespace Sistema_Banca_del_Tempo
         }
         public void addPrestazioni(List<Prestazione> prestazioni)
         {
-            if (checkAdminPassword(Password))
+            if (checkAdmin(UtenteAttuale))
             {
                 foreach (Prestazione s in prestazioni)
                 {
@@ -224,7 +240,7 @@ namespace Sistema_Banca_del_Tempo
         }
         public void deletePrestazione(string prestazione)
         {
-            if (checkAdminPassword(Password))
+            if (checkAdmin(UtenteAttuale))
             {
                 int cont = 0;
                 foreach(Prestazione s in Prestazioni)
@@ -241,13 +257,9 @@ namespace Sistema_Banca_del_Tempo
 
 
 
-        private bool checkAdminPassword(string password)
+        private bool checkAdmin(Utente admin)
         {
-            if (string.IsNullOrEmpty(password))
-                return false;
-            else if (password.Length < 4)
-                return false;
-            else if (AdminPasswordList.Contains(password))
+            if (Admin.Contains(admin))
                 return true;
             else return false;
         }

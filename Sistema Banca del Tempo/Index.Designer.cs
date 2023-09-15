@@ -34,13 +34,16 @@
             textBoxCognome = new TextBox();
             textBoxTelefono = new TextBox();
             textBoxPassord = new TextBox();
+            listView = new ListView();
+            buttonIndebitati = new Button();
+            buttonTuttiUtenti = new Button();
             SuspendLayout();
             // 
             // buttonSignIn
             // 
             buttonSignIn.BackColor = Color.PapayaWhip;
             buttonSignIn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonSignIn.Location = new Point(275, 268);
+            buttonSignIn.Location = new Point(320, 321);
             buttonSignIn.Name = "buttonSignIn";
             buttonSignIn.Size = new Size(126, 41);
             buttonSignIn.TabIndex = 0;
@@ -52,17 +55,18 @@
             // 
             buttonSignUp.BackColor = Color.PapayaWhip;
             buttonSignUp.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonSignUp.Location = new Point(529, 268);
+            buttonSignUp.Location = new Point(574, 321);
             buttonSignUp.Name = "buttonSignUp";
             buttonSignUp.Size = new Size(126, 41);
             buttonSignUp.TabIndex = 1;
             buttonSignUp.Text = "SIGN UP";
             buttonSignUp.UseVisualStyleBackColor = false;
+            buttonSignUp.Click += buttonSignUp_Click;
             // 
             // textBoxNome
             // 
             textBoxNome.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxNome.Location = new Point(275, 70);
+            textBoxNome.Location = new Point(320, 123);
             textBoxNome.Name = "textBoxNome";
             textBoxNome.PlaceholderText = "Nome";
             textBoxNome.Size = new Size(380, 29);
@@ -71,7 +75,7 @@
             // textBoxCognome
             // 
             textBoxCognome.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxCognome.Location = new Point(275, 105);
+            textBoxCognome.Location = new Point(320, 158);
             textBoxCognome.Name = "textBoxCognome";
             textBoxCognome.PlaceholderText = "Cognome";
             textBoxCognome.Size = new Size(380, 29);
@@ -80,7 +84,7 @@
             // textBoxTelefono
             // 
             textBoxTelefono.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxTelefono.Location = new Point(275, 140);
+            textBoxTelefono.Location = new Point(320, 193);
             textBoxTelefono.Name = "textBoxTelefono";
             textBoxTelefono.PlaceholderText = "Telefono";
             textBoxTelefono.Size = new Size(380, 29);
@@ -89,25 +93,62 @@
             // textBoxPassord
             // 
             textBoxPassord.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxPassord.Location = new Point(275, 175);
+            textBoxPassord.Location = new Point(320, 228);
             textBoxPassord.Name = "textBoxPassord";
             textBoxPassord.PlaceholderText = "Password";
             textBoxPassord.Size = new Size(380, 29);
             textBoxPassord.TabIndex = 5;
+            // 
+            // listView
+            // 
+            listView.BackColor = Color.White;
+            listView.Location = new Point(12, 65);
+            listView.Name = "listView";
+            listView.Size = new Size(779, 383);
+            listView.TabIndex = 6;
+            listView.UseCompatibleStateImageBehavior = false;
+            listView.Visible = false;
+            // 
+            // buttonIndebitati
+            // 
+            buttonIndebitati.BackColor = Color.Honeydew;
+            buttonIndebitati.Location = new Point(119, 32);
+            buttonIndebitati.Name = "buttonIndebitati";
+            buttonIndebitati.Size = new Size(101, 27);
+            buttonIndebitati.TabIndex = 7;
+            buttonIndebitati.Text = "Indebitati";
+            buttonIndebitati.UseVisualStyleBackColor = false;
+            buttonIndebitati.Visible = false;
+            // 
+            // buttonTuttiUtenti
+            // 
+            buttonTuttiUtenti.BackColor = Color.Honeydew;
+            buttonTuttiUtenti.Location = new Point(12, 32);
+            buttonTuttiUtenti.Name = "buttonTuttiUtenti";
+            buttonTuttiUtenti.Size = new Size(101, 27);
+            buttonTuttiUtenti.TabIndex = 8;
+            buttonTuttiUtenti.Text = "Tutti";
+            buttonTuttiUtenti.UseVisualStyleBackColor = false;
+            buttonTuttiUtenti.Visible = false;
+            buttonTuttiUtenti.Click += buttonTuttiUtenti_Click;
             // 
             // Index
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(994, 586);
+            Controls.Add(buttonTuttiUtenti);
+            Controls.Add(buttonIndebitati);
             Controls.Add(textBoxPassord);
             Controls.Add(textBoxTelefono);
             Controls.Add(textBoxCognome);
             Controls.Add(textBoxNome);
             Controls.Add(buttonSignUp);
             Controls.Add(buttonSignIn);
+            Controls.Add(listView);
             Name = "Index";
-            Text = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Index";
             Load += Index_Load;
             ResumeLayout(false);
             PerformLayout();
@@ -121,5 +162,8 @@
         private TextBox textBoxCognome;
         private TextBox textBoxTelefono;
         private TextBox textBoxPassord;
+        private ListView listView;
+        private Button buttonIndebitati;
+        private Button buttonTuttiUtenti;
     }
 }
