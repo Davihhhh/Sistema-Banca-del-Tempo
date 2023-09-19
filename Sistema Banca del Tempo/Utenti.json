@@ -1,3 +1,66 @@
-{
+[
+  {
+    "nome": "Mario",
+    "cognome": "Rossi",
+    "telefono": "3453269287",
+    "password": "sonomario",
+    "id": "1232914614516243",
+    "admin": false,
+    "prestazioniOfferte": {
 
-}
+      "nome": "Giardiniere",
+      "tempo": 3,
+      "completato": false
+    },
+    "prestazioniRichieste": {
+
+      "nome": "Insegnante privato",
+      "tempo": 2,
+      "completato": false
+    },
+    "prestazioniEseguite": {
+
+      "nome": "Giardiniere",
+      "tempo": 3,
+      "completato": true
+    },
+    "prestazioniRicevute": {
+
+      "nome": "Idraulico",
+      "tempo": 1,
+      "completato": true
+    }
+  },
+  {
+    "nome": "Luigi",
+    "cognome": "Verdi",
+    "telefono": "3453269287",
+    "password": "sonoluigi",
+    "id": "1232914614516243",
+    "admin": true,
+    "prestazioniOfferte": {
+
+      "nome": "Giardiniere",
+      "tempo": 3,
+      "completato": false
+    },
+    "prestazioniRichieste": {
+
+      "nome": "Insegnante privato",
+      "tempo": 2,
+      "completato": false
+    },
+    "prestazioniEseguite": {
+
+      "nome": "Giardiniere",
+      "tempo": 3,
+      "completato": true
+    },
+    "prestazioniRicevute": {
+
+      "nome": "Idraulico",
+      "tempo": 1,
+      "completato": true
+    }
+  }
+]

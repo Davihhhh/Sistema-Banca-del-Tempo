@@ -7,11 +7,7 @@ using System.Threading.Tasks;
 namespace Sistema_Banca_del_Tempo
 {
     public class Prestazione
-    {
-        private string _nome;
-        private int _tempo;
-        private bool _completato;
-
+    {     
         public string Nome { get; private set; }
         public int Tempo { get; private set; }
         public bool Completato { get; private set; }
@@ -28,6 +24,13 @@ namespace Sistema_Banca_del_Tempo
         public void confermaPrestazione()
         {
             Completato = true;
+        }
+        public bool Equals(Prestazione obj)
+        {
+            if(obj == null) return false;
+            if(obj == this) return true;
+            if (obj.Nome == this.Nome) return true;
+            return false;
         }
 
     }

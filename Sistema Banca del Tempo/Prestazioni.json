@@ -1,3 +1,17 @@
-{
-
-}
+[
+  {
+    "nome": "Idraulico",
+    "tempo": 1,
+    "completato": false
+  },
+  {
+    "nome": "Giardiniere",
+    "tempo": 3,
+    "completato": false
+  },
+  {
+    "nome": "Insegnante privato",
+    "tempo": 2,
+    "completato": false
+  }
+]

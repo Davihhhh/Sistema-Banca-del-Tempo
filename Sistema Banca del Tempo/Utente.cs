@@ -21,7 +21,9 @@ namespace Sistema_Banca_del_Tempo
         private List<Prestazione> _prestazioniOfferte;
         private List<Prestazione> _prestazioniRichieste;
         private List<Prestazione> _prestazioniEseguite;
-        private List<Prestazione> _prestazioniRicevute;      
+        private List<Prestazione> _prestazioniRicevute;
+
+        private bool admin;
 
         public string Nome { 
             get { return _nome; } 
@@ -44,8 +46,6 @@ namespace Sistema_Banca_del_Tempo
 
         private const char s = ';';
 
-        public Utente()
-        { }
         public Utente(string nome, string cognome, string telefono, string password)
         {
             Nome = nome;
@@ -53,6 +53,7 @@ namespace Sistema_Banca_del_Tempo
             Telefono = telefono;
             Password = password;
             Id = generateID(password);
+            admin = false;
         }
         public string generateID(string url_add)
         {
@@ -120,6 +121,10 @@ namespace Sistema_Banca_del_Tempo
         public override string ToString()
         {
             return Nome + s + Cognome + s + Telefono + s;
+        }
+        public bool isAdmin()
+        {
+            return admin;
         }
     }
 }

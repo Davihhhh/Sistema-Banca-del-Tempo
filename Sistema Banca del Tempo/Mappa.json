@@ -1,3 +1,14 @@
-{
-
-}
+[
+  {
+    "zona": "Loreto"
+  },
+  {
+    "zona": "San Paolo"
+  },
+  {
+    "zona": "Longuelo"
+  },
+  {
+    "zona": "Curno"
+  }
+]
