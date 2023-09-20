@@ -1,66 +1,74 @@
 [
   {
-    "nome": "Mario",
-    "cognome": "Rossi",
-    "telefono": "3453269287",
-    "password": "sonomario",
-    "id": "1232914614516243",
+    "Nome": "Mario",
+    "Cognome": "Rossi",
+    "Telefono": "3453269287",
+    "Password": "sonomario",
+    "Id": "1232914614516243",
     "admin": false,
-    "prestazioniOfferte": {
-
-      "nome": "Giardiniere",
-      "tempo": 3,
-      "completato": false
-    },
-    "prestazioniRichieste": {
-
-      "nome": "Insegnante privato",
-      "tempo": 2,
-      "completato": false
-    },
-    "prestazioniEseguite": {
-
-      "nome": "Giardiniere",
-      "tempo": 3,
-      "completato": true
-    },
-    "prestazioniRicevute": {
-
-      "nome": "Idraulico",
-      "tempo": 1,
-      "completato": true
-    }
+    "PrestazioniOfferte": [
+      {
+        "Nome": "Giardiniere",
+        "Tempo": 3,
+        "Completato": false
+      }
+    ],
+    "PrestazioniRichieste": [
+      {
+        "Nome": "Insegnante privato",
+        "Tempo": 2,
+        "Completato": false
+      }
+    ],
+    "PrestazioniEseguite": [
+      {
+        "Nome": "Giardiniere",
+        "Tempo": 3,
+        "Completato": true
+      }
+    ],
+    "PrestazioniRicevute": [
+      {
+        "Nome": "Idraulico",
+        "Tempo": 1,
+        "Completato": true
+      }
+    ]
   },
   {
-    "nome": "Luigi",
-    "cognome": "Verdi",
-    "telefono": "3453269287",
-    "password": "sonoluigi",
-    "id": "1232914614516243",
+    "Nome": "Luigi",
+    "Cognome": "Verdi",
+    "Telefono": "3453269287",
+    "Password": "sonoluigi",
+    "Id": "1232914614516243",
     "admin": true,
-    "prestazioniOfferte": {
-
-      "nome": "Giardiniere",
-      "tempo": 3,
-      "completato": false
-    },
-    "prestazioniRichieste": {
-
-      "nome": "Insegnante privato",
-      "tempo": 2,
-      "completato": false
-    },
-    "prestazioniEseguite": {
-
-      "nome": "Giardiniere",
-      "tempo": 3,
-      "completato": true
-    },
-    "prestazioniRicevute": {
-
-      "nome": "Idraulico",
-      "tempo": 1,
-      "completato": true
-    }
+    "PrestazioniOfferte": [
+      {
+        "Nome": "Giardiniere",
+        "Tempo": 3,
+        "Completato": false
+      }
+    ],
+    "PrestazioniRichieste": [
+      {
+        "Nome": "Insegnante privato",
+        "Tempo": 2,
+        "Completato": false
+      }
+    ],
+    "PrestazioniEseguite": [
+      {
+        "Nome": "Giardiniere",
+        "Tempo": 3,
+        "Completato": true
+      }
+    ],
+    "PrestazioniRicevute": [
+      {
+        "Nome": "Idraulico",
+        "Tempo": 1,
+        "Completato": true
+      }
+    ]
   }
 ]

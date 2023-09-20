@@ -60,10 +60,10 @@ namespace Sistema_Banca_del_Tempo
         //costruttori
         public Banca_del_Tempo()
         {
-            Prestazioni = letturaPrestazioni();
+            /*Prestazioni = letturaPrestazioni();
             Mappa = letturaMappa();
             Utenti = letturaUtenti();
-            Admin = letturaAdmin(Utenti);
+            Admin = letturaAdmin(Utenti);*/
             UtenteAttuale = empty;
         }
 
@@ -102,7 +102,7 @@ namespace Sistema_Banca_del_Tempo
             var json = File.ReadAllText(mappaPath);
 
             string[] mappa= new string[1];
-            //mappa = JsonSerializer.Deserialize<string[]>(json);
+            mappa = JsonSerializer.Deserialize<string[]>(json);
 
             return mappa;
         }

@@ -5,6 +5,7 @@ using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
 using System.Resources.Extensions;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -22,6 +23,8 @@ namespace Sistema_Banca_del_Tempo
         private List<Prestazione> _prestazioniRichieste;
         private List<Prestazione> _prestazioniEseguite;
         private List<Prestazione> _prestazioniRicevute;
+              
+        private string pattern = "^[0-9]+$";
 
         private bool admin;
 
@@ -34,8 +37,9 @@ namespace Sistema_Banca_del_Tempo
         public string Cognome { get { return _cognome; } private set { if (value.Length < 2) throw new Exception("Cognome invalido"); else _cognome = value; } }
         public string Telefono { get { return _telefono; } private set { 
                 if (value.Length < 10) throw new Exception("Telefono invalido"); 
-                try { Convert.ToInt32(value); } catch { throw new Exception("Telefono invalido"); }; _telefono = value; } 
-        }
+                if (Regex.IsMatch(value, pattern)) _telefono = value; else throw new Exception("Telefono invalido");
+            } 
+                }
         private string Password { get { return _password; } set { if (value.Length < 4) throw new Exception("Password invalida"); else _password = value; } }
         public string Id { get { return _id; } private set { _id = value; } }
 
