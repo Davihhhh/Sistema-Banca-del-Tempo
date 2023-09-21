@@ -1,34 +1,127 @@
 using System.Collections.Generic;
+using System.Security.Policy;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace Sistema_Banca_del_Tempo
 {
     public partial class Index : Form
     {
+        //variabili
+        private Banca_del_Tempo btd;
+        private string nome, cognome, telefono, password;
+        private Prestazione prestazioneAttuale;
+        private Zona residenza;
+
+        private string[] nomitest = new string[] { "mario", "luigi", "alessia" };
+        private string[] cognomitest = new string[] { "rossi", "verdi", "brown" };
+        private string[] telefonotest = new string[] { "1234567890", "3216540987", "0987654321" };
+        private string[] passwordtest = new string[] { "fsj9823", "wg225wf", "e3ff2fqewo" };
+        private Zona zonatest = new Zona("Bergamo");
+
+        private string[] prestazionitest = new string[] { "Giardiniere", "Contadino", "Pesce" };
+        private int[] tempitest = new int[] { 2, 3, 4 };
+
+        private string[] residenzetest = new string[] { "Bergamo", "Longuelo", "Loreto" };
+
+        private Utente invalid;
+
+        private const string eccezione = "Valori invalidi";
+
+        private const string prestazioniPath = @"Prestazioni.json";
+        private const string utentiPath = @"Utenti.json";
+        private const string mappaPath = @"Mappa.json";
+
+        //costruttori
         public Index()
         {
             InitializeComponent();
             this.ControlBox = false;
-        }
-
-        private void Index_Load(object sender, EventArgs e)
-        {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
+
+            test();
             start();
             try
             {
                 btd = new Banca_del_Tempo();
+                List<Zona> mappa = btd.Mappa;
+                foreach (Zona z in mappa)
+                {
+                    comboBoxZone.Items.Add(z.Nome);
+                }
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); this.Close(); };
-            btd = new Banca_del_Tempo();
+            catch (Exception ex) { MessageBox.Show(ex.Message); };
+            
+            invalid = new Utente("aaaa", "bbbb", "1234567890", "cccc", zonatest);
 
+            //z check();
         }
+
+
+        //funzioni
+        private void check()
+        {
+            string str = "";
+            foreach(Utente u in btd.Utenti) { str += u.Nome; }
+            MessageBox.Show(str);
+            str = "";
+            foreach (Prestazione p in btd.Prestazioni) { str += p.Nome; }
+            MessageBox.Show(str);
+            MessageBox.Show(btd.UtenteAttuale.Residenza.Nome);
+        }
+        private void Index_Load(object sender, EventArgs e)
+        {
+            
+        }
+        private void test()
+        {
+            string json1, json2, json3;
+
+            //MessageBox.Show("test");
+
+            List<Prestazione> list2 = new List<Prestazione>();
+            Prestazione prestazione1 = new Prestazione(prestazionitest[0], tempitest[0]);
+            Prestazione prestazione2 = new Prestazione(prestazionitest[1], tempitest[1]);
+            Prestazione prestazione3 = new Prestazione(prestazionitest[2], tempitest[2]);
+            list2.Add(prestazione1);
+            list2.Add(prestazione2);
+            list2.Add(prestazione3);           
+            json2 = JsonConvert.SerializeObject(list2);
+            System.IO.File.WriteAllText(prestazioniPath, json2);
+
+            List<Zona> list3 = new List<Zona>();
+            Zona zona1 = new Zona(residenzetest[0]);
+            Zona zona2 = new Zona(residenzetest[1]);
+            Zona zona3 = new Zona(residenzetest[2]);
+            list3.Add(zona1);
+            list3.Add(zona2);
+            list3.Add(zona3);
+            json3 = JsonConvert.SerializeObject(list3);
+            System.IO.File.WriteAllText(mappaPath, json3);
+
+            List<Utente> list1 = new List<Utente>();
+            Utente utente1 = new Utente(nomitest[0], cognomitest[0], telefonotest[0], passwordtest[0], zona1);
+            //utente1.offriPrestazione(prestazione1);
+            //utente1.richiediPrestazione(prestazione2);
+            Utente utente2 = new Utente(nomitest[1], cognomitest[1], telefonotest[1], passwordtest[1], zona2);
+            //utente2.offriPrestazione(prestazione2);
+            //utente1.richiediPrestazione(prestazione3);
+            Utente utente3 = new Utente(nomitest[2], cognomitest[2], telefonotest[2], passwordtest[2], zona3);
+            //utente3.offriPrestazione(prestazione3);
+            //utente1.richiediPrestazione(prestazione1);
+            list1.Add(utente1);
+            list1.Add(utente2);
+            list1.Add(utente3);
+            json1 = JsonConvert.SerializeObject(list1);
+            System.IO.File.WriteAllText(utentiPath, json1);
+        }
+
         private void start()
         {
             textBoxNome.Visible = true;
             textBoxCognome.Visible = true;
             textBoxTelefono.Visible = true;
-            textBoxPassord.Visible = true;
+            textBoxPassword.Visible = true;
             textBoxNomePrestazione.Visible = false;
             textBoxTempo.Visible = false;
             buttonSignIn.Visible = true;
@@ -38,6 +131,13 @@ namespace Sistema_Banca_del_Tempo
             buttonTuttiUtenti.Visible = false;
             buttonIndebitati.Visible = false;
             buttonOrePerPrestazione.Visible = false;
+            comboBoxZone.Visible = true;
+            buttonMiePrestazioniEseguite.Visible = false;
+            buttonMiePrestazioniRicevute.Visible = false;
+            buttonCercaPrestazione.Visible = false;
+            buttonConfermaPrestazione.Visible = false;
+            buttonOffriPrestaione.Visible = false;
+            buttonRichiediPrestazione.Visible = false;
             listView.Clear();
         }
         private void logged()
@@ -45,24 +145,7 @@ namespace Sistema_Banca_del_Tempo
             textBoxNome.Visible = false;
             textBoxCognome.Visible = false;
             textBoxTelefono.Visible = false;
-            textBoxPassord.Visible = false;
-            textBoxNomePrestazione.Visible = false;
-            textBoxTempo.Visible = false;
-            buttonSignIn.Visible = false;
-            buttonSignUp.Visible = false;
-            buttonLogout.Visible = true;
-            listView.Visible = true;
-            buttonTuttiUtenti.Visible = true;
-            buttonIndebitati.Visible = true;
-            buttonOrePerPrestazione.Visible = true;
-            listView.Clear();
-        }
-        private void loggedAdmin()
-        {
-            textBoxNome.Visible = false;
-            textBoxCognome.Visible = false;
-            textBoxTelefono.Visible = false;
-            textBoxPassord.Visible = false;
+            textBoxPassword.Visible = false;
             textBoxNomePrestazione.Visible = true;
             textBoxTempo.Visible = true;
             buttonSignIn.Visible = false;
@@ -72,144 +155,112 @@ namespace Sistema_Banca_del_Tempo
             buttonTuttiUtenti.Visible = true;
             buttonIndebitati.Visible = true;
             buttonOrePerPrestazione.Visible = true;
+            comboBoxZone.Visible = false;
+            buttonMiePrestazioniEseguite.Visible = true;
+            buttonMiePrestazioniRicevute.Visible = true;
+            buttonCercaPrestazione.Visible = true;
+            buttonConfermaPrestazione.Visible = true;
+            buttonOffriPrestaione.Visible = true;
+            buttonRichiediPrestazione.Visible = true;
             listView.Clear();
         }
-
-        private Banca_del_Tempo btd;
-        private string nome, cognome, telefono, password;
-        private Prestazione prestazioneAttuale;
-
-        private string[] nomitest = new string[] { "mario", "luigi", "alessia" };
-        private string[] cognomitest = new string[] { "rossi", "verdi", "brown" };
-        private string[] telefonotest = new string[] { "1234567890", "3216540987", "0987654321" };
-        private string[] passwordtest = new string[] { "fsj9823", "wg225wf", "e3ff2fqewo" };
-
-        private const string eccezione = "Valori invalidi";
+        private void loggedAdmin()
+        {
+            logged();
+            //funzioni admin da aggiungere
+        }
 
         private void buttonSignIn_Click(object sender, EventArgs e)
         {
-            Utente utente = new Utente(nomitest[0], cognomitest[0], telefonotest[0], passwordtest[0]);
+            Utente utente = new Utente(nomitest[0], cognomitest[0], telefonotest[0], passwordtest[0], zonatest);
             try
             {
                 utente = getDataTextBox();
-                btd.login(utente);
-                if (utente.isAdmin())
+                if(utente.Equals(invalid))
+                {
+                    return;
+                }
+                btd.login(utente);  
+                
+                if (utente.Admin)
                     loggedAdmin();
                 else logged();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
-
-
-        private void listView_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void buttonIndebitati_Click(object sender, EventArgs e)
-        {
-            nuoveColonne();
-            List<Utente> list = btd.listaUtentiIndebitati();
-            ListViewItem item = new ListViewItem();
-
-            foreach (Utente u in list)
-            {
-                item = new ListViewItem(u.ToString().Trim(';'));
-                listView.Items.Add(item);
-            }
-        }
-
         private void buttonSignUp_Click(object sender, EventArgs e)
         {
-            Utente utente = new Utente(nomitest[0], cognomitest[0], telefonotest[0], passwordtest[0]);
+            Utente utente = new Utente(nomitest[0], cognomitest[0], telefonotest[0], passwordtest[0], zonatest);
             try
             {
                 utente = getDataTextBox();
+                if (utente.Equals(invalid))
+                {
+                    return;
+                }
+                btd.register(utente);
+                logged();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); return; }
-            btd.aggiungiUtente(utente);
-            logged();
+            
         }
-
+        private void buttonIndebitati_Click(object sender, EventArgs e)
+        {
+            List<Utente> list = btd.listaUtentiIndebitati();
+            stampaUtenti(list);
+        }
         private void buttonOrePerPrestazione_Click(object sender, EventArgs e)
         {
-            listView.Clear();
-            List<Utente>[] list = btd.listaPerPrestazione();
-            List<Prestazione> p = btd.Prestazioni;
+            nuoveColonnePrestazione();
+
             ListViewItem item = new ListViewItem();
-            for (int i = 0; i < list.Length; i++)
+            List<string> strs = new List<string>();
+            Dictionary<string, List<Prestazione>> d = new Dictionary<string, List<Prestazione>>();
+            List<Prestazione> list = new List<Prestazione>();
+            int cont = 0;
+            string[] str = new string[2];
+            foreach (Prestazione p in btd.UtenteAttuale.PrestazioniEseguite)
             {
-                listView.Columns.Add(p[i].Nome);
-                foreach (Utente u in list[i])
+                if (!strs.Contains(p.Nome))
+                    strs.Add(p.Nome);
+            }
+            foreach (string s in strs)
+            {                
+                list = new List<Prestazione>();
+                foreach (Prestazione p in btd.UtenteAttuale.PrestazioniEseguite)
                 {
-                    item = new ListViewItem(u.ToString().Trim(';'));
-                    listView.Items.Add(item);
+                    if (p.Nome.Equals(s))
+                        list.Add(p);
                 }
+                d.Add(s, list);
+            }
+            foreach (KeyValuePair<string, List<Prestazione>> coppia in d)
+            {
+                list = new List<Prestazione>(coppia.Value);
+                foreach (Prestazione p in list)
+                {
+                    cont += p.Tempo;
+                }
+                str[0] = coppia.Key;
+                str[1] = cont.ToString(); 
+                item = new ListViewItem(str);
+                listView.Items.Add(item);
+                cont = 0;
             }
         }
-
         private void buttonLogout_Click(object sender, EventArgs e)
         {
-            btd.logout();
+            try
+            {
+                btd.logout();
+            } catch (Exception ex) { MessageBox.Show(ex.Message); }
             start();
-        }
-
-        private void buttonAggiungiPrestazione_Click(object sender, EventArgs e)
-        {
-            string nome = textBoxNomePrestazione.Text;
-            int tempo = Convert.ToInt32(textBoxTempo.Text);
-            try
-            {
-                Prestazione p = new Prestazione(nome, tempo);
-                btd.addPrestazione(p);
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
-        }
-
-        private void buttonRimuoviPrestazione_Click(object sender, EventArgs e)
-        {
-            string nome = textBoxNomePrestazione.Text;
-            int tempo = Convert.ToInt32(textBoxTempo.Text);
-            try
-            {
-                Prestazione p = new Prestazione(nome, tempo);
-                btd.deletePrestazione(p);
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
-        }
-
-        private Utente getDataTextBox()
-        {
-            nome = textBoxNome.Text;
-            cognome = textBoxCognome.Text;
-            telefono = textBoxPassord.Text;
-            password = textBoxTelefono.Text;
-
-            Utente utente = new Utente(nome, cognome, telefono, password);
-
-            return utente;
-        }
-
+        }       
         private void buttonTuttiUtenti_Click(object sender, EventArgs e)
         {
-            nuoveColonne();
             List<Utente> list = btd.Utenti;
-            ListViewItem item = new ListViewItem();
-
-            foreach (Utente u in list)
-            {
-                item = new ListViewItem(u.ToString().Trim(';'));
-                listView.Items.Add(item);
-            }
-        }
-        private void nuoveColonne()
-        {
-            listView.Clear();
-            listView.Columns.Add("Nome");
-            listView.Columns.Add("Cognome");
-            listView.Columns.Add("Telefono");
-        }
-
+            stampaUtenti(list);
+        }       
         private void buttonCercaPrestazione_Click(object sender, EventArgs e)
         {
             Prestazione p;
@@ -217,19 +268,11 @@ namespace Sistema_Banca_del_Tempo
             try
             {
                 p = new Prestazione(textBoxNomePrestazione.Text, Convert.ToInt32(textBoxTempo.Text));
-                list = btd.cercaPrestazione(p);
-                nuoveColonne();
-                ListViewItem item = new ListViewItem();
-                foreach (Utente u in list)
-                {
-                    item = new ListViewItem(u.ToString().Trim(';'));
-                    listView.Items.Add(item);
-                }
-
+                list = btd.cercaUtentiConPrestazione(p);
+                stampaUtenti(list);
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
-
         private void buttonRichiediPrestazione_Click(object sender, EventArgs e)
         {
             Prestazione p;
@@ -240,7 +283,6 @@ namespace Sistema_Banca_del_Tempo
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
-
         private void buttonOffriPrestaione_Click(object sender, EventArgs e)
         {
             Prestazione p;
@@ -250,34 +292,58 @@ namespace Sistema_Banca_del_Tempo
                 btd.UtenteAttuale.offriPrestazione(p);
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
-        }
-        private void nuoveColonnePrestazione()
-        {
-            listView.Clear();
-            listView.Columns.Add("Nome");
-            listView.Columns.Add("Durata");
-            listView.Columns.Add("Confermato");
-        }
+        }        
         private void buttonMiePrestazioniEseguite_Click(object sender, EventArgs e)
         {
-            List<Prestazione> list = btd.UtenteAttuale.PrestazioniEseguite;
+            try
+            {
+                List<Prestazione> list = btd.UtenteAttuale.PrestazioniEseguite;
+                stampaPrestazioni(list);
+            } catch (Exception ex) { MessageBox.Show(ex.Message); }          
+        }
+        private void buttonMiePrestazioniRicevute_Click(object sender, EventArgs e)
+        {
+            //risolvere
+            try
+            {
+                List<Prestazione> list = btd.UtenteAttuale.PrestazioniRicevute;
+                int a = 0, x = 50, y = 70;
+
+                foreach (Prestazione p in list)
+                {
+                    generaButton(p, a, x, y);
+                    a++;
+                    y += 30;
+                }
+            } catch (Exception ex) { MessageBox.Show(ex.Message); }            
+        }
+        private void stampaUtenti(List<Utente> list)
+        {
+            nuoveColonne();
+            ListViewItem item = new ListViewItem();
+            foreach (Utente u in list)
+            {
+                item = new ListViewItem(u.ToString().Split(';'));
+                listView.Items.Add(item);
+            }
+        }
+        private void stampaPrestazioni(List<Prestazione> list)
+        {
             nuoveColonnePrestazione();
-            int a = 0;
-            int x = 100;
-            int y = 50;
+            ListViewItem item = new ListViewItem();
             foreach (Prestazione p in list)
             {
-                generaButton(p, a, x, y);
-                a++;
-                x += 30;
+                item = new ListViewItem(p.ToString().Split(';'));
+                listView.Items.Add(item);
             }
         }
         private void generaButton(Prestazione prestazione, int cont, int x, int y)
         {
+            //risolvere
             Button Button = new Button();
 
-            Button.Height = 20;
-            Button.Width = 50;
+            Button.Height = 30;
+            Button.Width = 60;
             Button.BackColor = Color.White;
             Button.ForeColor = Color.Black;
             Button.Location = new Point(x, y);
@@ -301,15 +367,71 @@ namespace Sistema_Banca_del_Tempo
                 prestazioneAttuale = new Prestazione(str[0], Convert.ToInt32(str[1]));
             }
         }
-
         private void buttonConfermaPrestazione_Click(object sender, EventArgs e)
         {
-            prestazioneAttuale.confermaPrestazione();
+            Prestazione p;
+            string str;
+            int i;
+            try
+            {
+                str = textBoxNomePrestazione.Text;
+                i = Convert.ToInt32(textBoxTempo.Text);
+                p = new Prestazione(str, i);
+                btd.UtenteAttuale.accertaPrestazione(p);
+            } catch(Exception ex) { MessageBox.Show(ex.Message); }
+        }
+        
+        private void nuoveColonne()
+        {
+            listView.Clear();
+            listView.Columns.Add("Nome");
+            listView.Columns.Add("Cognome");
+            listView.Columns.Add("Telefono");
+            listView.Columns.Add("Residenza");
         }
 
-        private void buttonMiePrestazioniRicevute_Click(object sender, EventArgs e)
+        private void comboBoxZone_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void listView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxTelefono_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void nuoveColonnePrestazione()
+        {
+            listView.Clear();
+            listView.Columns.Add("Nome");
+            listView.Columns.Add("Durata");
+        }
+        private void buttonExit_Click(object sender, EventArgs e)
+        {
+            btd.exit();
+            this.Close();            
+        }
+        private Utente getDataTextBox()
+        {
+            nome = textBoxNome.Text;
+            cognome = textBoxCognome.Text;
+            telefono = textBoxTelefono.Text;
+            password = textBoxPassword.Text; 
+            if(comboBoxZone.SelectedIndex == -1 )
+            {
+                MessageBox.Show("Seleziona una zona!");
+                return invalid;
+            }
+            residenza = new Zona(comboBoxZone.SelectedItem.ToString());
+            //MessageBox.Show(nome + cognome + telefono + password + residenza.Nome);
+            Utente utente = new Utente(nome, cognome, telefono, password, residenza);
+
+            return utente;
         }
     }
 }

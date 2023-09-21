@@ -6,38 +6,40 @@ using System.Runtime;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using System.Text.Json;
+using Newtonsoft.Json;
 using System.Xml.Linq;
 using System.Net.Http.Json;
 using static System.Windows.Forms.Design.AxImporter;
+using System.Security.Principal;
+using System.Collections;
 
 namespace Sistema_Banca_del_Tempo
 {
-    internal class Banca_del_Tempo
+    public class Banca_del_Tempo
     {
+        //variabili 
         private List<Prestazione> _prestazioni;
-        private string[] _mappa;
+        private List<Zona> _mappa;
         private List<Utente> _utenti;
         private List<Utente> _admin;
         private Utente _utenteAttuale;
         private string _password;
 
+        //variabili interne
         private const string frase = "Non sei un amministratore!";
-        private Utente empty = new Utente("aaaa", "bbbb", "0000000000", "cccc");
-        private string prestazioniPath = @"Prestazioni.json";
-        private string utentiPath = @"Utenti.json";        
-        private string mappaPath = @"Mappa.json";
-        private readonly JsonSerializerOptions options = new()
-        {
-            PropertyNameCaseInsensitive = true
-        };
-
+        private Zona zona = new Zona("dddd");
+        private Utente empty;
+        private const string prestazioniPath = @"Prestazioni.json";
+        private const string utentiPath = @"Utenti.json";        
+        private const string mappaPath = @"Mappa.json";
+        
+        //properties
         public List<Prestazione> Prestazioni
         {
             get { return _prestazioni; }
             private set { _prestazioni = value; }
         }
-        public string[] Mappa
+        public List<Zona> Mappa
         {
             get { return _mappa; }
             private set { _mappa = value; }
@@ -54,64 +56,43 @@ namespace Sistema_Banca_del_Tempo
         }
         public Utente UtenteAttuale { get { return _utenteAttuale; } private set { _utenteAttuale = value; } }
         private string Password { get { return _password; } set { _password = value; } }
-
-        private const int size = 100;
-
+       
         //costruttori
         public Banca_del_Tempo()
         {
-            /*Prestazioni = letturaPrestazioni();
+            Prestazioni = letturaPrestazioni();
             Mappa = letturaMappa();
             Utenti = letturaUtenti();
-            Admin = letturaAdmin(Utenti);*/
+            Admin = letturaAdmin(Utenti);
+            empty = new Utente("aaaa", "bbbb", "0000000000", "cccc", zona);
             UtenteAttuale = empty;
         }
 
-        //funzioni
-        public void login(Utente u)
-        {
-            if (UtenteAttuale.Equals(empty))
-                try
-                {
-                    UtenteAttuale = u;
-                }
-                catch (Exception)
-                {
-                    return;
-                }        
-            else throw new Exception("Banca occupata");
-        }
-        public void logout()
-        {
-            if (UtenteAttuale.Equals(empty))
-                throw new Exception("Banca vuota");
-            else UtenteAttuale = empty;
-        }
-
+        //funzioni private
         private List<Prestazione> letturaPrestazioni()
-        {           
-            var json = File.ReadAllText(prestazioniPath);
-            
-            List<Prestazione> prestazioni = new List<Prestazione>();
-            //prestazioni = JsonSerializer.Deserialize<List<Prestazione>>(json);
-           
+        {
+            List<Prestazione> prestazioni;
+
+            string json = File.ReadAllText(prestazioniPath);
+            prestazioni = JsonConvert.DeserializeObject<List<Prestazione>>(json);
+
             return prestazioni;
         }
-        private string[] letturaMappa()
+        private List<Zona> letturaMappa()
         {
-            var json = File.ReadAllText(mappaPath);
+            List<Zona> mappa;
 
-            string[] mappa= new string[1];
-            mappa = JsonSerializer.Deserialize<string[]>(json);
+            string json = File.ReadAllText(mappaPath);
+            mappa = JsonConvert.DeserializeObject<List<Zona>>(json);
 
             return mappa;
         }
         private List<Utente> letturaUtenti()
         {
-            var json = File.ReadAllText(utentiPath);
+            List<Utente> lista;
 
-            List<Utente> lista = new List<Utente>();
-            //List<Utente> lista = JsonSerializer.Deserialize<List<Utente>>(json);
+            string json = File.ReadAllText(utentiPath);
+            lista = JsonConvert.DeserializeObject<List<Utente>>(json);
 
             return lista;
         }
@@ -120,20 +101,65 @@ namespace Sistema_Banca_del_Tempo
             List<Utente> admins = new List<Utente>();
             foreach(Utente u in utenti)
             {
-                if(u.isAdmin())
+                if(u.Admin)
                 {  admins.Add(u); }
             }
-
             return admins;
         }
-        public void aggiungiUtente(Utente utente)
-        {
-            Utenti.Add(utente);
-            string json = JsonSerializer.Serialize(utente);
-            File.WriteAllText(@"Utenti.json", json);
+
+
+        //funzioni pubbliche
+        public void login(Utente u)
+        {            
+            foreach (Utente x in Utenti)
+            {               
+                if (x.Equals(u))
+                    UtenteAttuale = u;
+            }
+            if (UtenteAttuale.Equals(empty))
+                throw new Exception("Utente inesistente o dati errati");
         }
+        public void logout()
+        {
+            UtenteAttuale = empty;
+        }
+        public void register(Utente utente)
+        {
+            foreach (Utente x in Utenti)
+            {
+                if (x.Equals(utente))
+                    throw new Exception("Utente già esistente");
+            }
+            Utenti.Add(utente);
+            login(utente);
+        }
+        public void exit()
+        {
+            string json1, json2, json3;
 
+            List<Utente> list1 = new List<Utente>();
+            json1 = JsonConvert.SerializeObject(list1);
+            System.IO.File.WriteAllText(utentiPath, json1);
 
+            List<Prestazione> list2 = new List<Prestazione>();          
+            json2 = JsonConvert.SerializeObject(list2);
+            System.IO.File.WriteAllText(prestazioniPath, json2);
+
+            List<Zona> list3 = new List<Zona>();            
+            json3 = JsonConvert.SerializeObject(list3);
+            System.IO.File.WriteAllText(mappaPath, json3);                 
+        }
+        public void addPrestazione(Prestazione prestazione)
+        {
+            if (Prestazioni.Contains(prestazione))
+                throw new Exception("Prestazione già esistente");
+            else
+            {
+                Prestazioni.Add(prestazione);
+                string json = JsonConvert.SerializeObject(prestazione);
+                System.IO.File.WriteAllText(prestazioniPath, json);
+            }
+        }
         public List<Utente> listaUtentiIndebitati()
         {
             List<Utente> indebitati = new List<Utente>();
@@ -162,17 +188,24 @@ namespace Sistema_Banca_del_Tempo
         {
             UtenteAttuale.richiediPrestazione(prestazione); 
         }
-        public List<Utente> cercaPrestazione(Prestazione prestazione)
+        public List<Utente> cercaUtentiConPrestazione(Prestazione prestazione)
         {
             List<Utente> lista = new List<Utente>();
             foreach(Utente u in Utenti)
             {
-                if(u.PrestazioniOfferte.Contains(prestazione))
-                    lista.Add(u); 
+                foreach (Prestazione p in u.PrestazioniOfferte)
+                {
+                    if (prestazione.Equals(p))
+                    {
+                        lista.Add(u);
+                        break;
+                    }
+                }
             }
+            throw new Exception(lista[0].ToString());
             return lista;
         }
-        public List<Utente>[] listaPerPrestazione()
+        /*public List<Utente>[] listaPerPrestazione()
         {
             List<Utente>[] liste = new List<Utente>[Prestazioni.Count];
             int cont = 0;
@@ -192,8 +225,8 @@ namespace Sistema_Banca_del_Tempo
                 cont2++;
             }
             return liste;
-        }
-        private List<Utente> quickSortUtenti(List<Utente> utente, int leftIndex, int rightIndex)
+        } */
+        /*private List<Utente> quickSortUtenti(List<Utente> utente, int leftIndex, int rightIndex)
         {
             var i = leftIndex;
             var j = rightIndex;
@@ -228,39 +261,8 @@ namespace Sistema_Banca_del_Tempo
                 quickSortUtenti(utente, i, rightIndex);
 
             return utente;
-        }
-        //public List<Utente> listaPrestazioneAltro()
-        
+        }*/
+        //public List<Utente> listaPrestazioneAltro()       
 
-
-
-        //admin functions
-        public void addPrestazione(Prestazione prestazione)
-        {
-            if (UtenteAttuale.isAdmin())
-            {
-                if (Prestazioni.Contains(prestazione))
-                    throw new Exception("Prestazione già esistente");
-                else
-                    Prestazioni[Prestazioni.Count] = prestazione;
-            }
-            else throw new Exception(frase);
-        }
-        public void deletePrestazione(Prestazione prestazione)
-        {
-            if (UtenteAttuale.isAdmin())
-            {
-                int cont = 0;
-                foreach(Prestazione s in Prestazioni)
-                {
-                    if (s.Equals(prestazione))
-                        break;
-                    else cont++;
-                }
-                for(int i = cont; i < Prestazioni.Count; i++)
-                    Prestazioni[i] = Prestazioni[i+1];
-            }
-            else throw new Exception(frase);
-        }
     }
 }

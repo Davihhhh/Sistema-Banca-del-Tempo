@@ -28,269 +28,301 @@
         /// </summary>
         private void InitializeComponent()
         {
-            buttonSignIn = new Button();
-            buttonSignUp = new Button();
-            textBoxNome = new TextBox();
-            textBoxCognome = new TextBox();
-            textBoxTelefono = new TextBox();
-            textBoxPassord = new TextBox();
-            listView = new ListView();
-            buttonIndebitati = new Button();
-            buttonTuttiUtenti = new Button();
-            buttonOrePerPrestazione = new Button();
-            buttonLogout = new Button();
-            textBoxNomePrestazione = new TextBox();
-            textBoxTempo = new TextBox();
-            buttonCercaPrestazione = new Button();
-            buttonOffriPrestaione = new Button();
-            buttonRichiediPrestazione = new Button();
-            buttonMiePrestazioniEseguite = new Button();
-            buttonMiePrestazioniRicevute = new Button();
-            buttonConfermaPrestazione = new Button();
-            SuspendLayout();
+            this.buttonSignIn = new System.Windows.Forms.Button();
+            this.buttonSignUp = new System.Windows.Forms.Button();
+            this.textBoxNome = new System.Windows.Forms.TextBox();
+            this.textBoxCognome = new System.Windows.Forms.TextBox();
+            this.textBoxTelefono = new System.Windows.Forms.TextBox();
+            this.textBoxPassword = new System.Windows.Forms.TextBox();
+            this.listView = new System.Windows.Forms.ListView();
+            this.buttonIndebitati = new System.Windows.Forms.Button();
+            this.buttonTuttiUtenti = new System.Windows.Forms.Button();
+            this.buttonOrePerPrestazione = new System.Windows.Forms.Button();
+            this.buttonLogout = new System.Windows.Forms.Button();
+            this.textBoxNomePrestazione = new System.Windows.Forms.TextBox();
+            this.textBoxTempo = new System.Windows.Forms.TextBox();
+            this.buttonCercaPrestazione = new System.Windows.Forms.Button();
+            this.buttonOffriPrestaione = new System.Windows.Forms.Button();
+            this.buttonRichiediPrestazione = new System.Windows.Forms.Button();
+            this.buttonMiePrestazioniEseguite = new System.Windows.Forms.Button();
+            this.buttonMiePrestazioniRicevute = new System.Windows.Forms.Button();
+            this.buttonConfermaPrestazione = new System.Windows.Forms.Button();
+            this.buttonExit = new System.Windows.Forms.Button();
+            this.comboBoxZone = new System.Windows.Forms.ComboBox();
+            this.SuspendLayout();
             // 
             // buttonSignIn
             // 
-            buttonSignIn.BackColor = Color.PapayaWhip;
-            buttonSignIn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonSignIn.Location = new Point(320, 321);
-            buttonSignIn.Name = "buttonSignIn";
-            buttonSignIn.Size = new Size(126, 41);
-            buttonSignIn.TabIndex = 0;
-            buttonSignIn.Text = "SIGN IN";
-            buttonSignIn.UseVisualStyleBackColor = false;
-            buttonSignIn.Click += buttonSignIn_Click;
+            this.buttonSignIn.BackColor = System.Drawing.Color.PapayaWhip;
+            this.buttonSignIn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonSignIn.Location = new System.Drawing.Point(320, 360);
+            this.buttonSignIn.Name = "buttonSignIn";
+            this.buttonSignIn.Size = new System.Drawing.Size(126, 41);
+            this.buttonSignIn.TabIndex = 0;
+            this.buttonSignIn.Text = "SIGN IN";
+            this.buttonSignIn.UseVisualStyleBackColor = false;
+            this.buttonSignIn.Click += new System.EventHandler(this.buttonSignIn_Click);
             // 
             // buttonSignUp
             // 
-            buttonSignUp.BackColor = Color.PapayaWhip;
-            buttonSignUp.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonSignUp.Location = new Point(574, 321);
-            buttonSignUp.Name = "buttonSignUp";
-            buttonSignUp.Size = new Size(126, 41);
-            buttonSignUp.TabIndex = 1;
-            buttonSignUp.Text = "SIGN UP";
-            buttonSignUp.UseVisualStyleBackColor = false;
-            buttonSignUp.Click += buttonSignUp_Click;
+            this.buttonSignUp.BackColor = System.Drawing.Color.PapayaWhip;
+            this.buttonSignUp.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonSignUp.Location = new System.Drawing.Point(574, 360);
+            this.buttonSignUp.Name = "buttonSignUp";
+            this.buttonSignUp.Size = new System.Drawing.Size(126, 41);
+            this.buttonSignUp.TabIndex = 1;
+            this.buttonSignUp.Text = "SIGN UP";
+            this.buttonSignUp.UseVisualStyleBackColor = false;
+            this.buttonSignUp.Click += new System.EventHandler(this.buttonSignUp_Click);
             // 
             // textBoxNome
             // 
-            textBoxNome.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxNome.Location = new Point(320, 123);
-            textBoxNome.Name = "textBoxNome";
-            textBoxNome.PlaceholderText = "Nome";
-            textBoxNome.Size = new Size(380, 29);
-            textBoxNome.TabIndex = 2;
+            this.textBoxNome.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxNome.Location = new System.Drawing.Point(320, 123);
+            this.textBoxNome.Name = "textBoxNome";
+            this.textBoxNome.PlaceholderText = "Nome";
+            this.textBoxNome.Size = new System.Drawing.Size(380, 29);
+            this.textBoxNome.TabIndex = 2;
+            this.textBoxNome.Text = "mario";
             // 
             // textBoxCognome
             // 
-            textBoxCognome.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxCognome.Location = new Point(320, 158);
-            textBoxCognome.Name = "textBoxCognome";
-            textBoxCognome.PlaceholderText = "Cognome";
-            textBoxCognome.Size = new Size(380, 29);
-            textBoxCognome.TabIndex = 3;
+            this.textBoxCognome.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxCognome.Location = new System.Drawing.Point(320, 158);
+            this.textBoxCognome.Name = "textBoxCognome";
+            this.textBoxCognome.PlaceholderText = "Cognome";
+            this.textBoxCognome.Size = new System.Drawing.Size(380, 29);
+            this.textBoxCognome.TabIndex = 3;
+            this.textBoxCognome.Text = "rossi";
             // 
             // textBoxTelefono
             // 
-            textBoxTelefono.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxTelefono.Location = new Point(320, 193);
-            textBoxTelefono.Name = "textBoxTelefono";
-            textBoxTelefono.PlaceholderText = "Telefono";
-            textBoxTelefono.Size = new Size(380, 29);
-            textBoxTelefono.TabIndex = 4;
+            this.textBoxTelefono.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxTelefono.Location = new System.Drawing.Point(320, 193);
+            this.textBoxTelefono.Name = "textBoxTelefono";
+            this.textBoxTelefono.PlaceholderText = "Telefono";
+            this.textBoxTelefono.Size = new System.Drawing.Size(380, 29);
+            this.textBoxTelefono.TabIndex = 4;
+            this.textBoxTelefono.Text = "1234567890";
+            this.textBoxTelefono.TextChanged += new System.EventHandler(this.textBoxTelefono_TextChanged);
             // 
-            // textBoxPassord
+            // textBoxPassword
             // 
-            textBoxPassord.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxPassord.Location = new Point(320, 228);
-            textBoxPassord.Name = "textBoxPassord";
-            textBoxPassord.PlaceholderText = "Password";
-            textBoxPassord.Size = new Size(380, 29);
-            textBoxPassord.TabIndex = 5;
+            this.textBoxPassword.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxPassword.Location = new System.Drawing.Point(320, 228);
+            this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.PlaceholderText = "Password";
+            this.textBoxPassword.Size = new System.Drawing.Size(380, 29);
+            this.textBoxPassword.TabIndex = 5;
+            this.textBoxPassword.Text = "fsj9823";
             // 
             // listView
             // 
-            listView.BackColor = Color.White;
-            listView.Location = new Point(12, 65);
-            listView.Name = "listView";
-            listView.Size = new Size(779, 509);
-            listView.TabIndex = 6;
-            listView.UseCompatibleStateImageBehavior = false;
-            listView.View = View.Details;
-            listView.Visible = false;
-            listView.SelectedIndexChanged += listView_SelectedIndexChanged;
+            this.listView.BackColor = System.Drawing.Color.White;
+            this.listView.Location = new System.Drawing.Point(12, 65);
+            this.listView.Name = "listView";
+            this.listView.Size = new System.Drawing.Size(359, 509);
+            this.listView.TabIndex = 6;
+            this.listView.UseCompatibleStateImageBehavior = false;
+            this.listView.View = System.Windows.Forms.View.Details;
+            this.listView.Visible = false;
+            this.listView.SelectedIndexChanged += new System.EventHandler(this.listView_SelectedIndexChanged);
             // 
             // buttonIndebitati
             // 
-            buttonIndebitati.BackColor = Color.Honeydew;
-            buttonIndebitati.Location = new Point(119, 12);
-            buttonIndebitati.Name = "buttonIndebitati";
-            buttonIndebitati.Size = new Size(101, 47);
-            buttonIndebitati.TabIndex = 7;
-            buttonIndebitati.Text = "Indebitati";
-            buttonIndebitati.UseVisualStyleBackColor = false;
-            buttonIndebitati.Visible = false;
-            buttonIndebitati.Click += buttonIndebitati_Click;
+            this.buttonIndebitati.BackColor = System.Drawing.Color.Honeydew;
+            this.buttonIndebitati.Location = new System.Drawing.Point(119, 12);
+            this.buttonIndebitati.Name = "buttonIndebitati";
+            this.buttonIndebitati.Size = new System.Drawing.Size(101, 47);
+            this.buttonIndebitati.TabIndex = 7;
+            this.buttonIndebitati.Text = "Indebitati";
+            this.buttonIndebitati.UseVisualStyleBackColor = false;
+            this.buttonIndebitati.Visible = false;
+            this.buttonIndebitati.Click += new System.EventHandler(this.buttonIndebitati_Click);
             // 
             // buttonTuttiUtenti
             // 
-            buttonTuttiUtenti.BackColor = Color.Honeydew;
-            buttonTuttiUtenti.Location = new Point(12, 12);
-            buttonTuttiUtenti.Name = "buttonTuttiUtenti";
-            buttonTuttiUtenti.Size = new Size(101, 47);
-            buttonTuttiUtenti.TabIndex = 8;
-            buttonTuttiUtenti.Text = "Tutti";
-            buttonTuttiUtenti.UseVisualStyleBackColor = false;
-            buttonTuttiUtenti.Visible = false;
-            buttonTuttiUtenti.Click += buttonTuttiUtenti_Click;
+            this.buttonTuttiUtenti.BackColor = System.Drawing.Color.Honeydew;
+            this.buttonTuttiUtenti.Location = new System.Drawing.Point(12, 12);
+            this.buttonTuttiUtenti.Name = "buttonTuttiUtenti";
+            this.buttonTuttiUtenti.Size = new System.Drawing.Size(101, 47);
+            this.buttonTuttiUtenti.TabIndex = 8;
+            this.buttonTuttiUtenti.Text = "Tutti";
+            this.buttonTuttiUtenti.UseVisualStyleBackColor = false;
+            this.buttonTuttiUtenti.Visible = false;
+            this.buttonTuttiUtenti.Click += new System.EventHandler(this.buttonTuttiUtenti_Click);
             // 
             // buttonOrePerPrestazione
             // 
-            buttonOrePerPrestazione.BackColor = Color.Honeydew;
-            buttonOrePerPrestazione.Location = new Point(226, 12);
-            buttonOrePerPrestazione.Name = "buttonOrePerPrestazione";
-            buttonOrePerPrestazione.Size = new Size(101, 47);
-            buttonOrePerPrestazione.TabIndex = 9;
-            buttonOrePerPrestazione.Text = "Ore per prestazione";
-            buttonOrePerPrestazione.UseVisualStyleBackColor = false;
-            buttonOrePerPrestazione.Visible = false;
-            buttonOrePerPrestazione.Click += buttonOrePerPrestazione_Click;
+            this.buttonOrePerPrestazione.BackColor = System.Drawing.Color.Honeydew;
+            this.buttonOrePerPrestazione.Location = new System.Drawing.Point(226, 12);
+            this.buttonOrePerPrestazione.Name = "buttonOrePerPrestazione";
+            this.buttonOrePerPrestazione.Size = new System.Drawing.Size(101, 47);
+            this.buttonOrePerPrestazione.TabIndex = 9;
+            this.buttonOrePerPrestazione.Text = "Ore per prestazione";
+            this.buttonOrePerPrestazione.UseVisualStyleBackColor = false;
+            this.buttonOrePerPrestazione.Visible = false;
+            this.buttonOrePerPrestazione.Click += new System.EventHandler(this.buttonOrePerPrestazione_Click);
             // 
             // buttonLogout
             // 
-            buttonLogout.BackColor = Color.MistyRose;
-            buttonLogout.Location = new Point(1007, 12);
-            buttonLogout.Name = "buttonLogout";
-            buttonLogout.Size = new Size(75, 32);
-            buttonLogout.TabIndex = 10;
-            buttonLogout.Text = "Logout";
-            buttonLogout.UseVisualStyleBackColor = false;
-            buttonLogout.Visible = false;
-            buttonLogout.Click += buttonLogout_Click;
+            this.buttonLogout.BackColor = System.Drawing.Color.MistyRose;
+            this.buttonLogout.Location = new System.Drawing.Point(942, 12);
+            this.buttonLogout.Name = "buttonLogout";
+            this.buttonLogout.Size = new System.Drawing.Size(75, 32);
+            this.buttonLogout.TabIndex = 10;
+            this.buttonLogout.Text = "Logout";
+            this.buttonLogout.UseVisualStyleBackColor = false;
+            this.buttonLogout.Visible = false;
+            this.buttonLogout.Click += new System.EventHandler(this.buttonLogout_Click);
             // 
             // textBoxNomePrestazione
             // 
-            textBoxNomePrestazione.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxNomePrestazione.Location = new Point(806, 193);
-            textBoxNomePrestazione.Name = "textBoxNomePrestazione";
-            textBoxNomePrestazione.PlaceholderText = "Nome";
-            textBoxNomePrestazione.Size = new Size(276, 29);
-            textBoxNomePrestazione.TabIndex = 13;
-            textBoxNomePrestazione.Visible = false;
+            this.textBoxNomePrestazione.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxNomePrestazione.Location = new System.Drawing.Point(738, 118);
+            this.textBoxNomePrestazione.Name = "textBoxNomePrestazione";
+            this.textBoxNomePrestazione.PlaceholderText = "Nome";
+            this.textBoxNomePrestazione.Size = new System.Drawing.Size(358, 29);
+            this.textBoxNomePrestazione.TabIndex = 13;
+            this.textBoxNomePrestazione.Visible = false;
             // 
             // textBoxTempo
             // 
-            textBoxTempo.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxTempo.Location = new Point(806, 228);
-            textBoxTempo.Name = "textBoxTempo";
-            textBoxTempo.PlaceholderText = "Tempo";
-            textBoxTempo.Size = new Size(276, 29);
-            textBoxTempo.TabIndex = 14;
-            textBoxTempo.Visible = false;
+            this.textBoxTempo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxTempo.Location = new System.Drawing.Point(738, 153);
+            this.textBoxTempo.Name = "textBoxTempo";
+            this.textBoxTempo.PlaceholderText = "Tempo";
+            this.textBoxTempo.Size = new System.Drawing.Size(358, 29);
+            this.textBoxTempo.TabIndex = 14;
+            this.textBoxTempo.Visible = false;
             // 
             // buttonCercaPrestazione
             // 
-            buttonCercaPrestazione.BackColor = Color.Honeydew;
-            buttonCercaPrestazione.Location = new Point(806, 123);
-            buttonCercaPrestazione.Name = "buttonCercaPrestazione";
-            buttonCercaPrestazione.Size = new Size(85, 47);
-            buttonCercaPrestazione.TabIndex = 15;
-            buttonCercaPrestazione.Text = "Cerca prestazine";
-            buttonCercaPrestazione.UseVisualStyleBackColor = false;
-            buttonCercaPrestazione.Visible = false;
-            buttonCercaPrestazione.Click += buttonCercaPrestazione_Click;
+            this.buttonCercaPrestazione.BackColor = System.Drawing.Color.Honeydew;
+            this.buttonCercaPrestazione.Location = new System.Drawing.Point(920, 65);
+            this.buttonCercaPrestazione.Name = "buttonCercaPrestazione";
+            this.buttonCercaPrestazione.Size = new System.Drawing.Size(85, 47);
+            this.buttonCercaPrestazione.TabIndex = 15;
+            this.buttonCercaPrestazione.Text = "Cerca prestazione";
+            this.buttonCercaPrestazione.UseVisualStyleBackColor = false;
+            this.buttonCercaPrestazione.Visible = false;
+            this.buttonCercaPrestazione.Click += new System.EventHandler(this.buttonCercaPrestazione_Click);
             // 
             // buttonOffriPrestaione
             // 
-            buttonOffriPrestaione.BackColor = Color.Honeydew;
-            buttonOffriPrestaione.Location = new Point(806, 65);
-            buttonOffriPrestaione.Name = "buttonOffriPrestaione";
-            buttonOffriPrestaione.Size = new Size(85, 47);
-            buttonOffriPrestaione.TabIndex = 16;
-            buttonOffriPrestaione.Text = "Offri prestazione";
-            buttonOffriPrestaione.UseVisualStyleBackColor = false;
-            buttonOffriPrestaione.Visible = false;
-            buttonOffriPrestaione.Click += buttonOffriPrestaione_Click;
+            this.buttonOffriPrestaione.BackColor = System.Drawing.Color.Honeydew;
+            this.buttonOffriPrestaione.Location = new System.Drawing.Point(738, 65);
+            this.buttonOffriPrestaione.Name = "buttonOffriPrestaione";
+            this.buttonOffriPrestaione.Size = new System.Drawing.Size(85, 47);
+            this.buttonOffriPrestaione.TabIndex = 16;
+            this.buttonOffriPrestaione.Text = "Offri prestazione";
+            this.buttonOffriPrestaione.UseVisualStyleBackColor = false;
+            this.buttonOffriPrestaione.Visible = false;
+            this.buttonOffriPrestaione.Click += new System.EventHandler(this.buttonOffriPrestaione_Click);
             // 
             // buttonRichiediPrestazione
             // 
-            buttonRichiediPrestazione.BackColor = Color.Honeydew;
-            buttonRichiediPrestazione.Location = new Point(897, 65);
-            buttonRichiediPrestazione.Name = "buttonRichiediPrestazione";
-            buttonRichiediPrestazione.Size = new Size(85, 47);
-            buttonRichiediPrestazione.TabIndex = 17;
-            buttonRichiediPrestazione.Text = "Richiedi prestazine";
-            buttonRichiediPrestazione.UseVisualStyleBackColor = false;
-            buttonRichiediPrestazione.Visible = false;
-            buttonRichiediPrestazione.Click += buttonRichiediPrestazione_Click;
+            this.buttonRichiediPrestazione.BackColor = System.Drawing.Color.Honeydew;
+            this.buttonRichiediPrestazione.Location = new System.Drawing.Point(829, 65);
+            this.buttonRichiediPrestazione.Name = "buttonRichiediPrestazione";
+            this.buttonRichiediPrestazione.Size = new System.Drawing.Size(85, 47);
+            this.buttonRichiediPrestazione.TabIndex = 17;
+            this.buttonRichiediPrestazione.Text = "Richiedi prestazine";
+            this.buttonRichiediPrestazione.UseVisualStyleBackColor = false;
+            this.buttonRichiediPrestazione.Visible = false;
+            this.buttonRichiediPrestazione.Click += new System.EventHandler(this.buttonRichiediPrestazione_Click);
             // 
             // buttonMiePrestazioniEseguite
             // 
-            buttonMiePrestazioniEseguite.BackColor = Color.Honeydew;
-            buttonMiePrestazioniEseguite.Location = new Point(333, 12);
-            buttonMiePrestazioniEseguite.Name = "buttonMiePrestazioniEseguite";
-            buttonMiePrestazioniEseguite.Size = new Size(101, 47);
-            buttonMiePrestazioniEseguite.TabIndex = 18;
-            buttonMiePrestazioniEseguite.Text = "Prestazioni eseguite";
-            buttonMiePrestazioniEseguite.UseVisualStyleBackColor = false;
-            buttonMiePrestazioniEseguite.Visible = false;
-            buttonMiePrestazioniEseguite.Click += buttonMiePrestazioniEseguite_Click;
+            this.buttonMiePrestazioniEseguite.BackColor = System.Drawing.Color.Honeydew;
+            this.buttonMiePrestazioniEseguite.Location = new System.Drawing.Point(333, 12);
+            this.buttonMiePrestazioniEseguite.Name = "buttonMiePrestazioniEseguite";
+            this.buttonMiePrestazioniEseguite.Size = new System.Drawing.Size(101, 47);
+            this.buttonMiePrestazioniEseguite.TabIndex = 18;
+            this.buttonMiePrestazioniEseguite.Text = "Prestazioni eseguite";
+            this.buttonMiePrestazioniEseguite.UseVisualStyleBackColor = false;
+            this.buttonMiePrestazioniEseguite.Visible = false;
+            this.buttonMiePrestazioniEseguite.Click += new System.EventHandler(this.buttonMiePrestazioniEseguite_Click);
             // 
             // buttonMiePrestazioniRicevute
             // 
-            buttonMiePrestazioniRicevute.BackColor = Color.Honeydew;
-            buttonMiePrestazioniRicevute.Location = new Point(440, 12);
-            buttonMiePrestazioniRicevute.Name = "buttonMiePrestazioniRicevute";
-            buttonMiePrestazioniRicevute.Size = new Size(101, 47);
-            buttonMiePrestazioniRicevute.TabIndex = 19;
-            buttonMiePrestazioniRicevute.Text = "Prestazioni ricevute";
-            buttonMiePrestazioniRicevute.UseVisualStyleBackColor = false;
-            buttonMiePrestazioniRicevute.Visible = false;
-            buttonMiePrestazioniRicevute.Click += buttonMiePrestazioniRicevute_Click;
+            this.buttonMiePrestazioniRicevute.BackColor = System.Drawing.Color.Honeydew;
+            this.buttonMiePrestazioniRicevute.Location = new System.Drawing.Point(440, 12);
+            this.buttonMiePrestazioniRicevute.Name = "buttonMiePrestazioniRicevute";
+            this.buttonMiePrestazioniRicevute.Size = new System.Drawing.Size(101, 47);
+            this.buttonMiePrestazioniRicevute.TabIndex = 19;
+            this.buttonMiePrestazioniRicevute.Text = "Prestazioni ricevute";
+            this.buttonMiePrestazioniRicevute.UseVisualStyleBackColor = false;
+            this.buttonMiePrestazioniRicevute.Visible = false;
+            this.buttonMiePrestazioniRicevute.Click += new System.EventHandler(this.buttonMiePrestazioniRicevute_Click);
             // 
             // buttonConfermaPrestazione
             // 
-            buttonConfermaPrestazione.BackColor = Color.Honeydew;
-            buttonConfermaPrestazione.Location = new Point(547, 12);
-            buttonConfermaPrestazione.Name = "buttonConfermaPrestazione";
-            buttonConfermaPrestazione.Size = new Size(85, 47);
-            buttonConfermaPrestazione.TabIndex = 20;
-            buttonConfermaPrestazione.Text = "Conferma prestazione";
-            buttonConfermaPrestazione.UseVisualStyleBackColor = false;
-            buttonConfermaPrestazione.Visible = false;
-            buttonConfermaPrestazione.Click += buttonConfermaPrestazione_Click;
+            this.buttonConfermaPrestazione.BackColor = System.Drawing.Color.Honeydew;
+            this.buttonConfermaPrestazione.Location = new System.Drawing.Point(1011, 65);
+            this.buttonConfermaPrestazione.Name = "buttonConfermaPrestazione";
+            this.buttonConfermaPrestazione.Size = new System.Drawing.Size(85, 47);
+            this.buttonConfermaPrestazione.TabIndex = 20;
+            this.buttonConfermaPrestazione.Text = "Conferma prestazione";
+            this.buttonConfermaPrestazione.UseVisualStyleBackColor = false;
+            this.buttonConfermaPrestazione.Visible = false;
+            this.buttonConfermaPrestazione.Click += new System.EventHandler(this.buttonConfermaPrestazione_Click);
+            // 
+            // buttonExit
+            // 
+            this.buttonExit.BackColor = System.Drawing.Color.MistyRose;
+            this.buttonExit.Location = new System.Drawing.Point(1023, 12);
+            this.buttonExit.Name = "buttonExit";
+            this.buttonExit.Size = new System.Drawing.Size(75, 32);
+            this.buttonExit.TabIndex = 21;
+            this.buttonExit.Text = "Exit";
+            this.buttonExit.UseVisualStyleBackColor = false;
+            this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
+            // 
+            // comboBoxZone
+            // 
+            this.comboBoxZone.BackColor = System.Drawing.Color.White;
+            this.comboBoxZone.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxZone.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.comboBoxZone.FormattingEnabled = true;
+            this.comboBoxZone.Location = new System.Drawing.Point(320, 263);
+            this.comboBoxZone.Name = "comboBoxZone";
+            this.comboBoxZone.Size = new System.Drawing.Size(380, 29);
+            this.comboBoxZone.TabIndex = 22;
+            this.comboBoxZone.SelectedIndexChanged += new System.EventHandler(this.comboBoxZone_SelectedIndexChanged);
             // 
             // Index
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1110, 586);
-            Controls.Add(buttonConfermaPrestazione);
-            Controls.Add(buttonMiePrestazioniRicevute);
-            Controls.Add(buttonMiePrestazioniEseguite);
-            Controls.Add(buttonRichiediPrestazione);
-            Controls.Add(buttonOffriPrestaione);
-            Controls.Add(buttonCercaPrestazione);
-            Controls.Add(textBoxTempo);
-            Controls.Add(textBoxNomePrestazione);
-            Controls.Add(buttonLogout);
-            Controls.Add(buttonOrePerPrestazione);
-            Controls.Add(buttonTuttiUtenti);
-            Controls.Add(buttonIndebitati);
-            Controls.Add(textBoxPassord);
-            Controls.Add(textBoxTelefono);
-            Controls.Add(textBoxCognome);
-            Controls.Add(textBoxNome);
-            Controls.Add(buttonSignUp);
-            Controls.Add(buttonSignIn);
-            Controls.Add(listView);
-            Name = "Index";
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "Index";
-            Load += Index_Load;
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1110, 586);
+            this.Controls.Add(this.comboBoxZone);
+            this.Controls.Add(this.buttonExit);
+            this.Controls.Add(this.buttonConfermaPrestazione);
+            this.Controls.Add(this.buttonMiePrestazioniRicevute);
+            this.Controls.Add(this.buttonMiePrestazioniEseguite);
+            this.Controls.Add(this.buttonRichiediPrestazione);
+            this.Controls.Add(this.buttonOffriPrestaione);
+            this.Controls.Add(this.buttonCercaPrestazione);
+            this.Controls.Add(this.textBoxTempo);
+            this.Controls.Add(this.textBoxNomePrestazione);
+            this.Controls.Add(this.buttonLogout);
+            this.Controls.Add(this.buttonOrePerPrestazione);
+            this.Controls.Add(this.buttonTuttiUtenti);
+            this.Controls.Add(this.buttonIndebitati);
+            this.Controls.Add(this.textBoxPassword);
+            this.Controls.Add(this.textBoxTelefono);
+            this.Controls.Add(this.textBoxCognome);
+            this.Controls.Add(this.textBoxNome);
+            this.Controls.Add(this.buttonSignUp);
+            this.Controls.Add(this.buttonSignIn);
+            this.Controls.Add(this.listView);
+            this.Name = "Index";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Click += new System.EventHandler(this.Index_Load);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
@@ -300,7 +332,7 @@
         private TextBox textBoxNome;
         private TextBox textBoxCognome;
         private TextBox textBoxTelefono;
-        private TextBox textBoxPassord;
+        private TextBox textBoxPassword;
         private ListView listView;
         private Button buttonIndebitati;
         private Button buttonTuttiUtenti;
@@ -314,5 +346,7 @@
         private Button buttonMiePrestazioniEseguite;
         private Button buttonMiePrestazioniRicevute;
         private Button buttonConfermaPrestazione;
+        private Button buttonExit;
+        private ComboBox comboBoxZone;
     }
 }
