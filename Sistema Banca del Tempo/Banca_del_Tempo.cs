@@ -137,15 +137,15 @@ namespace Sistema_Banca_del_Tempo
         {
             string json1, json2, json3;
 
-            List<Utente> list1 = new List<Utente>();
+            List<Utente> list1 = Utenti;
             json1 = JsonConvert.SerializeObject(list1);
             System.IO.File.WriteAllText(utentiPath, json1);
 
-            List<Prestazione> list2 = new List<Prestazione>();          
+            List<Prestazione> list2 = Prestazioni;          
             json2 = JsonConvert.SerializeObject(list2);
             System.IO.File.WriteAllText(prestazioniPath, json2);
 
-            List<Zona> list3 = new List<Zona>();            
+            List<Zona> list3 = Mappa;            
             json3 = JsonConvert.SerializeObject(list3);
             System.IO.File.WriteAllText(mappaPath, json3);                 
         }
