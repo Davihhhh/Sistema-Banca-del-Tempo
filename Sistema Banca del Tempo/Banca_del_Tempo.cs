@@ -205,7 +205,32 @@ namespace Sistema_Banca_del_Tempo
             throw new Exception(lista[0].ToString());
             return lista;
         }
-        /*public List<Utente>[] listaPerPrestazione()
+        public void rimuoviUtente(string id)
+        {
+            if (UtenteAttuale.Id.Equals(id))
+                throw new Exception("Non puoi eliminare te stesso...");
+            if (UtenteAttuale.Admin)
+                foreach (Utente x in Utenti)
+                {
+                    if (x.Id.Equals(id))
+                    {
+                        Utenti.Remove(x);
+                    }
+                }
+            else throw new Exception(frase);
+        }
+
+        public Utente cercaUtente(string id)
+        {
+            foreach(Utente x in Utenti)
+            {
+                if (x.Id.Equals(id))
+                    return x;
+            }
+            throw new Exception("Utente non trovato");
+        }
+        /* 
+         public List<Utente>[] listaPerPrestazione()
         {
             List<Utente>[] liste = new List<Utente>[Prestazioni.Count];
             int cont = 0;

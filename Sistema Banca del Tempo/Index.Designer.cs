@@ -49,6 +49,8 @@
             this.buttonConfermaPrestazione = new System.Windows.Forms.Button();
             this.buttonExit = new System.Windows.Forms.Button();
             this.comboBoxZone = new System.Windows.Forms.ComboBox();
+            this.textBoxId = new System.Windows.Forms.TextBox();
+            this.buttonRimuoviUtente = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonSignIn
@@ -179,9 +181,9 @@
             // textBoxNomePrestazione
             // 
             this.textBoxNomePrestazione.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxNomePrestazione.Location = new System.Drawing.Point(738, 118);
+            this.textBoxNomePrestazione.Location = new System.Drawing.Point(738, 123);
             this.textBoxNomePrestazione.Name = "textBoxNomePrestazione";
-            this.textBoxNomePrestazione.PlaceholderText = "Nome";
+            this.textBoxNomePrestazione.PlaceholderText = "Nome prestazione";
             this.textBoxNomePrestazione.Size = new System.Drawing.Size(358, 29);
             this.textBoxNomePrestazione.TabIndex = 13;
             this.textBoxNomePrestazione.Visible = false;
@@ -189,9 +191,9 @@
             // textBoxTempo
             // 
             this.textBoxTempo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxTempo.Location = new System.Drawing.Point(738, 153);
+            this.textBoxTempo.Location = new System.Drawing.Point(738, 158);
             this.textBoxTempo.Name = "textBoxTempo";
-            this.textBoxTempo.PlaceholderText = "Tempo";
+            this.textBoxTempo.PlaceholderText = "Durata";
             this.textBoxTempo.Size = new System.Drawing.Size(358, 29);
             this.textBoxTempo.TabIndex = 14;
             this.textBoxTempo.Visible = false;
@@ -291,11 +293,35 @@
             this.comboBoxZone.TabIndex = 22;
             this.comboBoxZone.SelectedIndexChanged += new System.EventHandler(this.comboBoxZone_SelectedIndexChanged);
             // 
+            // textBoxId
+            // 
+            this.textBoxId.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxId.Location = new System.Drawing.Point(740, 193);
+            this.textBoxId.Name = "textBoxId";
+            this.textBoxId.PlaceholderText = "Id utente";
+            this.textBoxId.Size = new System.Drawing.Size(358, 29);
+            this.textBoxId.TabIndex = 23;
+            this.textBoxId.Visible = false;
+            // 
+            // buttonRimuoviUtente
+            // 
+            this.buttonRimuoviUtente.BackColor = System.Drawing.Color.Honeydew;
+            this.buttonRimuoviUtente.Location = new System.Drawing.Point(547, 12);
+            this.buttonRimuoviUtente.Name = "buttonRimuoviUtente";
+            this.buttonRimuoviUtente.Size = new System.Drawing.Size(101, 47);
+            this.buttonRimuoviUtente.TabIndex = 24;
+            this.buttonRimuoviUtente.Text = "Rimuovi utente";
+            this.buttonRimuoviUtente.UseVisualStyleBackColor = false;
+            this.buttonRimuoviUtente.Visible = false;
+            this.buttonRimuoviUtente.Click += new System.EventHandler(this.buttonRimuoviUtente_Click);
+            // 
             // Index
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1110, 586);
+            this.Controls.Add(this.buttonRimuoviUtente);
+            this.Controls.Add(this.textBoxId);
             this.Controls.Add(this.comboBoxZone);
             this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.buttonConfermaPrestazione);
@@ -319,6 +345,7 @@
             this.Controls.Add(this.listView);
             this.Name = "Index";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Load += new System.EventHandler(this.Index_Load_1);
             this.Click += new System.EventHandler(this.Index_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -348,5 +375,7 @@
         private Button buttonConfermaPrestazione;
         private Button buttonExit;
         private ComboBox comboBoxZone;
+        private TextBox textBoxId;
+        private Button buttonRimuoviUtente;
     }
 }

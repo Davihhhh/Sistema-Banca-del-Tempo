@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
 using System.Resources.Extensions;
+using System.Security.Policy;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -63,7 +64,14 @@ namespace Sistema_Banca_del_Tempo
 
         //variabili interne
         private const char s = ';';
-        private Prestazione empty = new Prestazione("abcd1234", 100000);
+        private const string any = "Qualsiasi";
+        private Utente Qualsiasi;
+        private Prestazione empty;
+        private Zona zona = new Zona("dddd");
+        private static Zona z = new Zona(any);
+        private static Utente u = new Utente("aaaa", "bbbb", "0000000000", "cccc", z);
+
+
 
         //costruttori
         public Utente(string nome, string cognome, string telefono, string password, Zona residenza)
@@ -80,10 +88,13 @@ namespace Sistema_Banca_del_Tempo
             PrestazioniEseguite = new List<Prestazione>();
             PrestazioniRicevute = new List<Prestazione>();
 
+            empty = new Prestazione("abcd1234", u, 100000);
+
             PrestazioniOfferte.Add(empty);
             PrestazioniRichieste.Add(empty);
             PrestazioniEseguite.Add(empty);
             PrestazioniRicevute.Add(empty);
+           
         }
 
         //funzioni private
@@ -174,6 +185,11 @@ namespace Sistema_Banca_del_Tempo
                 return true;
             else return false;
             //&& u.PrestazioniEseguite.Equals(this.PrestazioniEseguite) && u.PrestazioniRichieste.Equals(this.PrestazioniRichieste) && u.PrestazioniOfferte.Equals(this.PrestazioniOfferte) && u.PrestazioniRicevute.Equals(this.PrestazioniRicevute)
+        }
+        public Utente getUtenteQualsiasi()
+        {            
+            Qualsiasi = new Utente(any, any, any, any, zona);
+            return Qualsiasi;
         }
     }
 }

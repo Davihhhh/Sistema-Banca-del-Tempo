@@ -78,14 +78,16 @@ namespace Sistema_Banca_del_Tempo
             string json1, json2, json3;
 
             //MessageBox.Show("test");
+            Zona zona = new Zona(residenzetest[0]);
+            Utente utente = new Utente(nomitest[0], cognomitest[0], telefonotest[0], passwordtest[0], zona);
 
             List<Prestazione> list2 = new List<Prestazione>();
-            Prestazione prestazione1 = new Prestazione(prestazionitest[0], tempitest[0]);
-            Prestazione prestazione2 = new Prestazione(prestazionitest[1], tempitest[1]);
-            Prestazione prestazione3 = new Prestazione(prestazionitest[2], tempitest[2]);
+            Prestazione prestazione1 = new Prestazione(prestazionitest[0], utente ,tempitest[0]);
+            Prestazione prestazione2 = new Prestazione(prestazionitest[1], utente, tempitest[1]);
+            Prestazione prestazione3 = new Prestazione(prestazionitest[2], utente, tempitest[2]);
             list2.Add(prestazione1);
-            list2.Add(prestazione2);
-            list2.Add(prestazione3);           
+            list2.Add(prestazione2);           
+            list2.Add(prestazione3);
             json2 = JsonConvert.SerializeObject(list2);
             System.IO.File.WriteAllText(prestazioniPath, json2);
 
@@ -123,6 +125,7 @@ namespace Sistema_Banca_del_Tempo
             textBoxTelefono.Visible = true;
             textBoxPassword.Visible = true;
             textBoxNomePrestazione.Visible = false;
+            textBoxId.Visible = false;
             textBoxTempo.Visible = false;
             buttonSignIn.Visible = true;
             buttonSignUp.Visible = true;
@@ -138,6 +141,7 @@ namespace Sistema_Banca_del_Tempo
             buttonConfermaPrestazione.Visible = false;
             buttonOffriPrestaione.Visible = false;
             buttonRichiediPrestazione.Visible = false;
+            buttonRimuoviUtente.Visible = false;
             listView.Clear();
         }
         private void logged()
@@ -148,6 +152,7 @@ namespace Sistema_Banca_del_Tempo
             textBoxPassword.Visible = false;
             textBoxNomePrestazione.Visible = true;
             textBoxTempo.Visible = true;
+            textBoxId.Visible = true;
             buttonSignIn.Visible = false;
             buttonSignUp.Visible = false;
             buttonLogout.Visible = true;
@@ -167,7 +172,7 @@ namespace Sistema_Banca_del_Tempo
         private void loggedAdmin()
         {
             logged();
-            //funzioni admin da aggiungere
+            buttonRimuoviUtente.Visible = true;
         }
 
         private void buttonSignIn_Click(object sender, EventArgs e)
@@ -267,7 +272,7 @@ namespace Sistema_Banca_del_Tempo
             List<Utente> list = new List<Utente>();
             try
             {
-                p = new Prestazione(textBoxNomePrestazione.Text, Convert.ToInt32(textBoxTempo.Text));
+                p = new Prestazione(textBoxNomePrestazione.Text, btd.UtenteAttuale.getUtenteQualsiasi(), Convert.ToInt32(textBoxTempo.Text));
                 list = btd.cercaUtentiConPrestazione(p);
                 stampaUtenti(list);
             }
@@ -278,7 +283,7 @@ namespace Sistema_Banca_del_Tempo
             Prestazione p;
             try
             {
-                p = new Prestazione(textBoxNomePrestazione.Text, Convert.ToInt32(textBoxTempo.Text));
+                p = new Prestazione(textBoxNomePrestazione.Text, btd.UtenteAttuale.getUtenteQualsiasi(), Convert.ToInt32(textBoxTempo.Text));
                 btd.UtenteAttuale.richiediPrestazione(p);
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
@@ -288,7 +293,7 @@ namespace Sistema_Banca_del_Tempo
             Prestazione p;
             try
             {
-                p = new Prestazione(textBoxNomePrestazione.Text, Convert.ToInt32(textBoxTempo.Text));
+                p = new Prestazione(textBoxNomePrestazione.Text, btd.UtenteAttuale, Convert.ToInt32(textBoxTempo.Text));
                 btd.UtenteAttuale.offriPrestazione(p);
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
@@ -303,19 +308,12 @@ namespace Sistema_Banca_del_Tempo
         }
         private void buttonMiePrestazioniRicevute_Click(object sender, EventArgs e)
         {
-            //risolvere
             try
             {
                 List<Prestazione> list = btd.UtenteAttuale.PrestazioniRicevute;
-                int a = 0, x = 50, y = 70;
-
-                foreach (Prestazione p in list)
-                {
-                    generaButton(p, a, x, y);
-                    a++;
-                    y += 30;
-                }
-            } catch (Exception ex) { MessageBox.Show(ex.Message); }            
+                stampaPrestazioni(list);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
         private void stampaUtenti(List<Utente> list)
         {
@@ -337,7 +335,7 @@ namespace Sistema_Banca_del_Tempo
                 listView.Items.Add(item);
             }
         }
-        private void generaButton(Prestazione prestazione, int cont, int x, int y)
+        /*private void generaButton(Prestazione prestazione, int cont, int x, int y)
         {
             //risolvere
             Button Button = new Button();
@@ -357,27 +355,37 @@ namespace Sistema_Banca_del_Tempo
 
             Button.Click += new EventHandler(Button_Click);
             Controls.Add(Button);
-        }
+        }*/
         private void Button_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
             string[] str = btn.Name.Split(' ');
             if (btn != null)
             {
-                prestazioneAttuale = new Prestazione(str[0], Convert.ToInt32(str[1]));
+                prestazioneAttuale = new Prestazione(str[0], btd.UtenteAttuale.getUtenteQualsiasi(), Convert.ToInt32(str[1]));
             }
         }
         private void buttonConfermaPrestazione_Click(object sender, EventArgs e)
         {
             Prestazione p;
-            string str;
+            string str, id;
             int i;
             try
             {
                 str = textBoxNomePrestazione.Text;
-                i = Convert.ToInt32(textBoxTempo.Text);
-                p = new Prestazione(str, i);
-                btd.UtenteAttuale.accertaPrestazione(p);
+                id = textBoxId.Text;                
+                Utente u = btd.cercaUtente(id);
+                
+                i = Convert.ToInt32(textBoxTempo.Text);               
+                p = new Prestazione(str, u, i);
+                foreach(Prestazione x in btd.UtenteAttuale.PrestazioniRicevute)
+                {
+                    if(x.Equals(p))
+                    {
+                        p.Utente_Che_Esegue.PrestazioniEseguite.Add(p);
+                        break;
+                    }
+                }
             } catch(Exception ex) { MessageBox.Show(ex.Message); }
         }
         
@@ -394,22 +402,37 @@ namespace Sistema_Banca_del_Tempo
         {
 
         }
-
         private void listView_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
-
         private void textBoxTelefono_TextChanged(object sender, EventArgs e)
         {
 
         }
+        private void Index_Load_1(object sender, EventArgs e)
+        {
+
+        }
+        private void buttonRimuoviUtente_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string str = textBoxId.Text;
+                btd.rimuoviUtente(str);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
 
         private void nuoveColonnePrestazione()
         {
-            listView.Clear();
-            listView.Columns.Add("Nome");
-            listView.Columns.Add("Durata");
+            try
+            {
+                listView.Clear();
+                listView.Columns.Add("Nome");
+                listView.Columns.Add("Durata");
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
         private void buttonExit_Click(object sender, EventArgs e)
         {
